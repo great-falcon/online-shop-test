@@ -1,29 +1,26 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import ItemCard from './ItemCard'
+import React from "react";
+import { connect } from "react-redux";
+import addToShoppingCart from "../../actions/ShoppingCartActions/addToShoppingCart";
+import ItemCard from "./ItemCard";
 
-const styles = {
-  card: {
-    maxWidth: 345,
-  },
-  media: {
-    height: 140,
-  },
-  cardAction: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    margin: '0 20px'
+class ItemCardContainer extends React.Component {
+  handleAddToCart = () => {
+    this.props.addToShoppingCart(this.props.item);
+  };
+
+  render() {
+    const { item } = this.props;
+    return <ItemCard handleAddToCart={this.handleAddToCart} item={item} />;
   }
-};
-
-function ItemCardContainer(props) {
-  const { classes, item } = props;
-  return <ItemCard classes={classes} item={item} />
 }
 
-ItemCardContainer.propTypes = {
-  classes: PropTypes.object.isRequired,
+const mapDispatchToProps = dispatch => {
+  return {
+    addToShoppingCart: item => dispatch(addToShoppingCart(item))
+  };
 };
 
-export default withStyles(styles)(ItemCardContainer);
+export default connect(
+  null,
+  mapDispatchToProps
+)(ItemCardContainer);

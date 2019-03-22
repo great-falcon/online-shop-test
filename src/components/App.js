@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "../pages/Main";
 import { withStyles } from "@material-ui/core/styles";
 import withRoot from "../withRoot";
-import MenuAppBar from './MenuAppBar';
 import ShoppingCart from "../pages/ShoppingCart";
+import MainLayout from '../layaut/default'
 
 const styles = theme => ({
   root: {
@@ -17,7 +17,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <MenuAppBar />
+        <MainLayout />
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/cart/" component={ShoppingCart} />
