@@ -1,70 +1,65 @@
-import { withStyles } from '@material-ui/core/styles';
-import MenuAppBar from './MenuAppBar'
+import React, { Fragment } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
+import MenuAppBar from "./MenuAppBar";
+import MenuDrawer from "./MenuDrawer";
 
+class MenuAppBarContainer extends React.Component {
+  state = {
+    auth: false,
+    open: false
+  };
 
-const drawerWidth = 240;
+  handleDrawerOpen = () => {
+    this.setState({ open: true });
+  };
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    display: 'flex',
-    marginBottom: 75
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: 20
-  },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    padding: '0 20px'
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing.unit * 3,
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
-});
+  handleDrawerClose = () => {
+    this.setState({ open: false });
+  };
 
+  handleAuthButton = () => {
+    this.setState({ auth: !this.state.auth });
+  };
 
-export default withStyles(styles, { withTheme: true })(MenuAppBar);
+  handleHomeButton = () => {
+    this.props.history.push("/");
+  };
+
+  handleCartButton = () => {
+    this.props.history.push("/cart");
+  };
+
+  render() {
+    const { theme, itemsInCart } = this.props;
+    const { auth, open } = this.state;
+
+    return (
+      <Fragment>
+        <MenuAppBar
+          itemsInCart={itemsInCart}
+          auth={auth}
+          open={open}
+          handleDrawerOpen={this.handleDrawerOpen}
+          handleCartButton={this.handleCartButton}
+          handleAuthButton={this.handleAuthButton}
+        />
+        <MenuDrawer
+          theme={theme}
+          open={open}
+          handleDrawerClose={this.handleDrawerClose}
+          handleCartButton={this.handleCartButton}
+          handleHomeButton={this.handleHomeButton}
+        />
+      </Fragment>
+    );
+  }
+}
+
+const mapStateToProps = store => {
+  return {
+    itemsInCart: store.shoppingCart.itemsInCart
+  };
+};
+
+export default connect(mapStateToProps)(withRouter(MenuAppBarContainer));
