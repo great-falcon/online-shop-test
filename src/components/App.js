@@ -21,10 +21,6 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/cart/" component={ShoppingCart} />
-            {/* <Route exact path="/users/" component={Users} />
-            <Route exact path="/posts/new-post/" component={NewPost} />
-            <Route exact path="/users/:userId/posts/" component={Posts} />
-            <Route exact path="/posts/:postId/" component={Post} /> */}
         </Switch>
       </Router>
     );
