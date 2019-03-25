@@ -1,10 +1,10 @@
 import {CHANGE_QUANTITY} from '../actionTypes';
 
-export default (id, newCount) => {
+export default (_id, newCount) => {
   return {
     type: CHANGE_QUANTITY,
     payload: {
-      id,
+      _id,
       newCount
     }
   }

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import getItems from "../../actions/ItemsActions/getItems";
 import { connect } from "react-redux";
 import Main from "./Main";
-import Loading from "../../components/Loading";
+import Loader from "../../components/Loader";
 import Error from "../../components/Error";
 
 class ItemsContainer extends Component {
@@ -11,21 +11,24 @@ class ItemsContainer extends Component {
   }
 
   render() {
-    const { itemsList, isLoading, error } = this.props.items;
+    const { itemsList, isLoading, error } = this.props;
     if (error) {
       return <Error error={error} />;
     }
-    if (isLoading) {
-      return <Loading />;
+    if (!itemsList.length && isLoading) {
+      return <Loader loading={isLoading} />
     }
 
-    return <Main items={itemsList} />;
+    return <Main items={itemsList} />
   }
 }
 
 const mapStateToProps = store => {
   return {
-    items: store.items
+    itemsList: store.items.itemsList,
+    isLoading: store.loading.isLoading,
+    error: store.errorHandling.error,
+    isError: store.errorHandling.isError,
   };
 };
 

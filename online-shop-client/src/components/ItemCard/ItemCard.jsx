@@ -17,7 +17,7 @@ class ItemCard extends React.Component {
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image={item.url}
+            image={item.imageUrl}
             title={item.title}
           />
           <CardContent>
@@ -30,7 +30,7 @@ class ItemCard extends React.Component {
           </CardContent>
         </CardActionArea>
         <CardActions className={classes.cardAction}>
-          <Typography>$100.00</Typography>
+          <Typography>${item.price.toFixed(2)}</Typography>
           <Button onClick={handleAddToCart} size="small" color="primary">
             Add To Cart
           </Button>

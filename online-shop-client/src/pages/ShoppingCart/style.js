@@ -7,8 +7,9 @@ export const styles = theme => ({
   title: {
     margin: `${theme.spacing.unit * 4}px 0 ${theme.spacing.unit * 2}px`
   },
-  costText: {
+  checkout: {
     display: "flex",
-    justifyContent: "flex-end"
+    flexDirection: 'column',
+    alignItems: "flex-end"
   }
 });

@@ -13,7 +13,7 @@ function ItemsGridList(props) {
     <div className={classes.root}>
       <GridList cellHeight={270} spacing={1} className={classes.gridList}>
         {items.map((item) => (
-          <GridListTile key={item.id}>
+          <GridListTile key={item._id}>
             <ItemCard item={item} />
           </GridListTile>
         ))}

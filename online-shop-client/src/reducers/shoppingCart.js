@@ -15,13 +15,13 @@ export default (state = initialState, action) => {
     case REMOVE_FROM_CART:
       return {
         itemsInCart: state.itemsInCart.filter(
-          item => item.id !== action.payload
+          item => item._id !== action.payload
         )
       };
     case CHANGE_QUANTITY:
       return {
         itemsInCart: state.itemsInCart.map(item => {
-          if (item.id === action.payload.id) {
+          if (item._id === action.payload._id) {
             item.count = action.payload.newCount;
           }
           return item;

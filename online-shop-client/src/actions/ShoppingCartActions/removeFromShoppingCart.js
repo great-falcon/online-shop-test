@@ -1,8 +1,8 @@
 import { REMOVE_FROM_CART } from '../actionTypes';
 
-export default (id) => {
+export default (_id) => {
   return {
     type: REMOVE_FROM_CART,
-    payload: id,
+    payload: _id,
   }
 }

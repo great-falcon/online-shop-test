@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express();
-const port = 3001;
+const port = 4000;
 
 const mongoose = require('mongoose');
 mongoose.Promise = Promise;
@@ -13,15 +13,15 @@ const routes = require('./routes');
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
-app.use(function (req, res, next) {
-  if (req.headers.authorization && req.headers.authorization === 'true-token') {
-    next();
-  } else {
-    const error = new Error('Token is requered');
-    error.statusCode = 401;
-    next(error);
-  }
-});
+// app.use(function (req, res, next) {
+//   if (req.headers.authorization && req.headers.authorization === 'true-token') {
+//     next();
+//   } else {
+//     const error = new Error('Token is requered');
+//     error.statusCode = 401;
+//     next(error);
+//   }
+// });
 
 app.use(routes);
 

@@ -12,25 +12,31 @@ class ShoppingCartContainer extends React.Component {
   handleDecrementItemsCount = id => () => {
     this.props.changeQuantity(
       id,
-      this.props.itemsInCart.find(elem => elem.id === id).count - 1
+      this.props.itemsInCart.find(elem => elem._id === id).count - 1
     );
   };
 
   handleIncrementItemsCount = id => () => {
     this.props.changeQuantity(
       id,
-      this.props.itemsInCart.find(elem => elem.id === id).count + 1
+      this.props.itemsInCart.find(elem => elem._id === id).count + 1
     );
   };
+  countTotal = () => 
+    this.props.itemsInCart.reduce((sum, item) => {
+      return sum + item.price * item.count
+    }, 0)
 
   render() {
     const { itemsInCart } = this.props;
+
     return (
       <ShoppingCart
         items={itemsInCart}
         handleDeleteItem={this.handleDeleteItem}
         handleDecrementItemsCount={this.handleDecrementItemsCount}
         handleIncrementItemsCount={this.handleIncrementItemsCount}
+        totalCost={this.countTotal()}
       />
     );
   }

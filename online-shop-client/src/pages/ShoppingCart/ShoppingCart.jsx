@@ -13,6 +13,7 @@ import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
 import Divider from "@material-ui/core/Divider";
 import { styles } from "./style";
+import Button from "@material-ui/core/Button";
 
 class ShoppingCart extends React.Component {
   render() {
@@ -21,7 +22,8 @@ class ShoppingCart extends React.Component {
       items,
       handleDeleteItem,
       handleDecrementItemsCount,
-      handleIncrementItemsCount
+      handleIncrementItemsCount,
+      totalCost
     } = this.props;
     return (
       <div className={classes.root}>
@@ -31,7 +33,7 @@ class ShoppingCart extends React.Component {
         <div className={classes.demo}>
           <List>
             {items.map(item => (
-              <ListItem key={item.id}>
+              <ListItem key={item._id}>
                 <ListItemAvatar>
                   <Avatar alt={item.title} src={item.thumbnailUrl} />
                 </ListItemAvatar>
@@ -40,7 +42,7 @@ class ShoppingCart extends React.Component {
                   {item.count > 1 && (
                     <IconButton
                       aria-label="Decrement"
-                      onClick={handleDecrementItemsCount(item.id)}
+                      onClick={handleDecrementItemsCount(item._id)}
                     >
                       <RemoveIcon />
                     </IconButton>
@@ -48,13 +50,13 @@ class ShoppingCart extends React.Component {
                   {item.count}
                   <IconButton
                     aria-label="Increment"
-                    onClick={handleIncrementItemsCount(item.id)}
+                    onClick={handleIncrementItemsCount(item._id)}
                   >
                     <AddIcon />
                   </IconButton>
                   <IconButton
                     aria-label="Delete"
-                    onClick={handleDeleteItem(item.id)}
+                    onClick={handleDeleteItem(item._id)}
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -63,9 +65,18 @@ class ShoppingCart extends React.Component {
             ))}
           </List>
           <Divider />
-          <Typography variant="h6" className={classes.costText}>
-            Total Cost:
-          </Typography>
+          <div className={classes.checkout}>
+            <Typography variant="h6" className={classes.costText}>
+              Total Cost: ${totalCost.toFixed(2)}
+            </Typography>
+            {totalCost > 0 && <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+            >
+              CHECKOUT
+            </Button>}
+          </div>
         </div>
       </div>
     );
