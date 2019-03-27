@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import withRoot from "../withRoot";
 import ShoppingCart from "../pages/ShoppingCart";
 import MainLayout from '../layaut/default'
+import Order from "../pages/Order";
 
 const styles = theme => ({
   root: {
@@ -21,6 +22,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/cart/" component={ShoppingCart} />
+          <Route exact path='/order' component={Order} />
         </Switch>
       </Router>
     );

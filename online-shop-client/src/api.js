@@ -1,12 +1,30 @@
-import axios from 'axios';
+const axios = require('axios')
 
-const baseUrl = "http://localhost:4000";
+const instance = axios.create({
+  baseURL: 'http://localhost:3010',
+  headers: {
+    'Content-Type': 'application/json',
+    
+  }
+})
+instance.interceptors.request.use(function (config) {
+  console.log('Make request to BE', config.url)
+  return config
+})
+instance.interceptors.response.use(function (response) {
+  // Do something with response data
+  console.log('response from server')
+  return response
+})
+const request = (method, url) => (params = {}) => {
+  if (params.token && method === 'get') {
+    instance.defaults.headers.common.Authorization = `Bearer ${params.token}`
+  }
 
-const request = (method, url, configs) => params => {
-  return axios[method](`${baseUrl}${url}`, params, configs)
+  return instance[ method ](url, params)
 }
-
 export const shop = {
-  fetchItems: request('get', '/products', {headers: {'authorization': 'true-token'}})
-};
+    fetchItems: request('get', '/products'),
+    sendOrder: request('post', '/orders')
+  };
 

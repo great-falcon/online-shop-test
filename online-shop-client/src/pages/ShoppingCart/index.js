@@ -3,6 +3,7 @@ import ShoppingCart from "./ShoppingCart";
 import { connect } from "react-redux";
 import changeQuantity from "../../actions/ShoppingCartActions/changeQuantity";
 import removeFromShoppingCart from "../../actions/ShoppingCartActions/removeFromShoppingCart";
+import makeOrder from "../../actions/OrderActions/makeOrder";
 
 class ShoppingCartContainer extends React.Component {
   handleDeleteItem = id => () => {
@@ -27,6 +28,11 @@ class ShoppingCartContainer extends React.Component {
       return sum + item.price * item.count
     }, 0)
 
+  handleCheckout = () => {
+    this.props.makeOrder();
+    this.props.history.push('/order');
+  }
+
   render() {
     const { itemsInCart } = this.props;
 
@@ -37,6 +43,7 @@ class ShoppingCartContainer extends React.Component {
         handleDecrementItemsCount={this.handleDecrementItemsCount}
         handleIncrementItemsCount={this.handleIncrementItemsCount}
         totalCost={this.countTotal()}
+        handleCheckout={this.handleCheckout}
       />
     );
   }
@@ -51,7 +58,8 @@ const mapStateToProps = store => {
 const mapDispatchToProps = dispatch => {
   return {
     changeQuantity: (id, newCount) => dispatch(changeQuantity(id, newCount)),
-    removeFromShoppingCart: id => dispatch(removeFromShoppingCart(id))
+    removeFromShoppingCart: id => dispatch(removeFromShoppingCart(id)),
+    makeOrder: () => dispatch(makeOrder())
   };
 };
 

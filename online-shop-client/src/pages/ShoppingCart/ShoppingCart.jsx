@@ -23,7 +23,8 @@ class ShoppingCart extends React.Component {
       handleDeleteItem,
       handleDecrementItemsCount,
       handleIncrementItemsCount,
-      totalCost
+      totalCost,
+      handleCheckout
     } = this.props;
     return (
       <div className={classes.root}>
@@ -73,6 +74,7 @@ class ShoppingCart extends React.Component {
               variant="contained"
               color="primary"
               className={classes.button}
+              onClick={handleCheckout}
             >
               CHECKOUT
             </Button>}

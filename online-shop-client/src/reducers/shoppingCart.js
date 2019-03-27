@@ -1,7 +1,8 @@
 import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
-  CHANGE_QUANTITY
+  CHANGE_QUANTITY,
+  CLEAR_SHOPPING_CART
 } from "../actions/actionTypes";
 
 const initialState = {
@@ -27,6 +28,8 @@ export default (state = initialState, action) => {
           return item;
         })
       };
+    case CLEAR_SHOPPING_CART:
+      return { itemsInCart: [] }
     default:
       return state;
   }
