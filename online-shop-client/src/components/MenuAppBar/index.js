@@ -31,14 +31,14 @@ class MenuAppBarContainer extends React.Component {
   };
 
   render() {
-    const { theme, itemsInCart, isAuth } = this.props;
+    const { theme, itemsInCart, isAuthorized } = this.props;
     const { open } = this.state;
 
     return (
       <Fragment>
         <MenuAppBar
           itemsInCart={itemsInCart}
-          auth={isAuth}
+          auth={isAuthorized}
           open={open}
           handleDrawerOpen={this.handleDrawerOpen}
           handleCartButton={this.handleCartButton}
@@ -59,7 +59,7 @@ class MenuAppBarContainer extends React.Component {
 const mapStateToProps = store => {
   return {
     itemsInCart: store.shoppingCart.itemsInCart,
-    isAuth: store.auth.isAuth,
+    isAuthorized: store.auth.isAuthorized,
   };
 };
 

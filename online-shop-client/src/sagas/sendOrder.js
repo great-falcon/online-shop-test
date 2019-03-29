@@ -15,12 +15,10 @@ function* sendOrder() {
   } = yield select();
 
   const params = {
-    order: itemsInCart.map(item => {
-      return {
-        id: item._id,
-        count: item.count
-      };
-    })
+    order: itemsInCart.map(item => ({
+      id: item._id,
+      count: item.count
+    }))
   };
 
   try {

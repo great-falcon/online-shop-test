@@ -21,8 +21,7 @@ class SignInForm extends React.Component {
       email,
       password,
       handleSubmit,
-      formValid,
-      isFailed
+      formValid
     } = this.props;
 
     return (
@@ -62,9 +61,9 @@ class SignInForm extends React.Component {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            {isFailed && <Typography color="error" variant="body1">
+            {/* {isFailed && <Typography color="error" variant="body1">
             Wrong email or password
-            </Typography>}
+            </Typography>} */}
             <Button
               type="submit"
               fullWidth

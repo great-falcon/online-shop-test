@@ -5,8 +5,7 @@ import {
   GET_ITEMS_SUCCESS,
   LOADING_ON,
   LOADING_OFF,
-  SHOW_ERROR,
-  HIDE_ERROR
+  SHOW_ERROR
 } from "../actions/actionTypes";
 
 function* fetchItems() {
@@ -15,7 +14,6 @@ function* fetchItems() {
   } = yield select();
 
   try {
-    yield put({ type: HIDE_ERROR });
     yield put({ type: LOADING_ON });
     const items = yield call(shop.fetchItems, { token });
 
@@ -24,7 +22,8 @@ function* fetchItems() {
     yield put({ type: LOADING_OFF });
     yield put({ type: GET_ITEMS_SUCCESS, payload: items.data });
   } catch (error) {
-    yield put({ type: SHOW_ERROR, payload: error });
+    yield put({ type: LOADING_OFF });
+    yield put({ type: SHOW_ERROR, payload: error.message });
   }
 }
 

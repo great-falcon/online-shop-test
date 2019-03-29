@@ -29,7 +29,7 @@ export default (state = initialState, action) => {
         })
       };
     case CLEAR_SHOPPING_CART:
-      return { itemsInCart: [] }
+      return initialState;
     default:
       return state;
   }

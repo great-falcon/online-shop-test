@@ -3,7 +3,7 @@ import { shop } from "../api";
 import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGIN_FAILED,
+  SHOW_ERROR,
   LOADING_ON,
   LOADING_OFF
 } from "../actions/actionTypes";
@@ -18,7 +18,8 @@ function* loginUser({payload}) {
     yield put({ type: LOADING_OFF });
     yield put({ type: LOGIN_SUCCESS, payload: {token: resp.data} });
   } catch (error) {
-    yield put({ type: LOGIN_FAILED, payload: error.response.statusText });
+    yield put({ type: LOADING_OFF });
+    yield put({ type: SHOW_ERROR, payload: error.response.statusText });
   }
 }
 

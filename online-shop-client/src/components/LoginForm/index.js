@@ -1,10 +1,11 @@
-import React from "react";
+import React, {Fragment} from "react";
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
 import SwipibleTabs from "../SwipibleTabs";
 import { connect } from "react-redux";
 import userLogin from "../../actions/AuthActions/userLogin";
 import userRegister from "../../actions/AuthActions/userRegister";
+import Error from "../Error";
 
 class LoginForm extends React.Component {
   state = {
@@ -70,8 +71,11 @@ class LoginForm extends React.Component {
   }
 
   render() {
-    if (this.props.isAuth) {
+    if (this.props.isAuthorized) {
       this.props.history.goBack();
+    }
+    if (this.props.error) {
+      return <Error />;
     }
     return (
       <SwipibleTabs>
@@ -81,7 +85,6 @@ class LoginForm extends React.Component {
           email={this.state.email}
           password={this.state.password}
           formValid={this.state.formValid}
-          isFailed={!!this.props.error}
         />
         <SignUpForm
           handleChangeField={this.handleChangeField}
@@ -91,14 +94,15 @@ class LoginForm extends React.Component {
           formErrors={this.state.formErrors}
           formValid={this.state.formValid}
         />
+        <Error />
       </SwipibleTabs>
     );
   }
 }
 const mapStateToProps = store => {
   return {
-    isAuth: store.auth.isAuth,
-    error: store.auth.error
+    isAuthorized: store.auth.isAuthorized,
+    error: store.errorHandling.error
   };
 };
 

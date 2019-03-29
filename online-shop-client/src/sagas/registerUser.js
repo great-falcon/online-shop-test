@@ -3,7 +3,7 @@ import { shop } from "../api";
 import {
   SIGNUP_REQUEST,
   SIGNUP_SUCCESS,
-  SIGNUP_FAILED,
+  SHOW_ERROR,
   LOGIN_REQUEST,
   LOADING_ON,
   LOADING_OFF
@@ -16,12 +16,13 @@ function* registerUser({payload}) {
 
     yield delay(1000);
 
-    yield put({type: LOGIN_REQUEST, payload })
     yield put({ type: SIGNUP_SUCCESS, payload: {token: resp.data} });
     yield put({ type: LOADING_OFF });
+
+    yield put({type: LOGIN_REQUEST, payload })
   } catch (error) {
     yield put({ type: LOADING_OFF });
-    yield put({ type: SIGNUP_FAILED, payload: error.response.statusText });
+    yield put({ type: SHOW_ERROR, payload: error.response.statusText });
   }
 }
 

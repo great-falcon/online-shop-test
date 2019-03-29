@@ -3,7 +3,7 @@ import getItems from "../../actions/ItemsActions/getItems";
 import { connect } from "react-redux";
 import Main from "./Main";
 import Loader from "../../components/Loader";
-import Error from "../../components/Error";
+import Error from "../../components/Error/";
 
 class ItemsContainer extends Component {
   componentDidMount() {
@@ -13,7 +13,7 @@ class ItemsContainer extends Component {
   render() {
     const { itemsList, isLoading, error } = this.props;
     if (error) {
-      return <Error error={error} />;
+      return <Error />;
     }
     if (!itemsList.length && isLoading) {
       return <Loader loading={isLoading} />
