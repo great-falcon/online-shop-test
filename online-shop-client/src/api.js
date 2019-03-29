@@ -25,6 +25,8 @@ const request = (method, url) => (params = {}) => {
 }
 export const shop = {
     fetchItems: request('get', '/products'),
-    sendOrder: request('post', '/orders')
+    sendOrder: request('post', '/orders'),
+    login: request('post', '/auth/login'),
+    register: request('post', '/auth/register')
   };
 

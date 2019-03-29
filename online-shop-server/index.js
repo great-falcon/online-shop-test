@@ -1,6 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors')
+const cors = require('cors');
+const authRouter = require("./auth.route");
+const checkToken = require('./middlewares/checkToken')
 
 const app = express();
 const port = 3010;
@@ -25,8 +27,9 @@ app.use(bodyParser.json());
 //     next(error);
 //   }
 // });
+app.use("/auth", authRouter);
 
-app.use(routes);
+app.use(checkToken, routes);
 
 
 app.use(function (req, res) {

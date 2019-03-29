@@ -2,6 +2,6 @@ import React from "react";
 
 
 export default ({error}) => {
-  return <p className="error">Something went wrong </p>
+  return <p className="error">{error.message}</p>
 
 }

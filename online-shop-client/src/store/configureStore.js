@@ -6,6 +6,8 @@ import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 import { watchItemsFetch } from "../sagas/fetchItems";
 import { watchSendOrder } from "../sagas/sendOrder";
+import { watchUserLogin } from "../sagas/loginUser";
+import { watchUserRegister } from "../sagas/registerUser";
 
 
 const sagaMiddleware = createSagaMiddleware()
@@ -18,6 +20,8 @@ function* rootSaga() {
   yield all([
     watchItemsFetch(),
     watchSendOrder(),
+    watchUserLogin(),
+    watchUserRegister()
   ])
 }
 

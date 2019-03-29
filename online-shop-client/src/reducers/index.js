@@ -4,6 +4,7 @@ import items from './items';
 import loading from './loading'
 import errorHandling from './errorHandling'
 import order from './order'
+import auth from './auth'
 
 
 export default combineReducers(
@@ -12,6 +13,7 @@ export default combineReducers(
     shoppingCart,
     loading,
     errorHandling,
-    order
+    order,
+    auth
   }
 )

@@ -6,7 +6,6 @@ import MenuDrawer from "./MenuDrawer";
 
 class MenuAppBarContainer extends React.Component {
   state = {
-    auth: false,
     open: false
   };
 
@@ -19,7 +18,8 @@ class MenuAppBarContainer extends React.Component {
   };
 
   handleAuthButton = () => {
-    this.setState({ auth: !this.state.auth });
+    // this.setState({ auth: !this.state.auth });
+    this.props.history.push('/login')
   };
 
   handleHomeButton = () => {
@@ -31,14 +31,14 @@ class MenuAppBarContainer extends React.Component {
   };
 
   render() {
-    const { theme, itemsInCart } = this.props;
-    const { auth, open } = this.state;
+    const { theme, itemsInCart, isAuth } = this.props;
+    const { open } = this.state;
 
     return (
       <Fragment>
         <MenuAppBar
           itemsInCart={itemsInCart}
-          auth={auth}
+          auth={isAuth}
           open={open}
           handleDrawerOpen={this.handleDrawerOpen}
           handleCartButton={this.handleCartButton}
@@ -58,7 +58,8 @@ class MenuAppBarContainer extends React.Component {
 
 const mapStateToProps = store => {
   return {
-    itemsInCart: store.shoppingCart.itemsInCart
+    itemsInCart: store.shoppingCart.itemsInCart,
+    isAuth: store.auth.isAuth,
   };
 };
 
